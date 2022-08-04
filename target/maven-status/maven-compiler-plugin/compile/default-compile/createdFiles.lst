@@ -1,0 +1,6 @@
+com/school/management/service/StudentService.class
+com/school/management/rest/StudentController.class
+com/school/management/SchoolApplication.class
+com/school/management/repository/StudentRepository.class
+com/school/management/model/dto/StudentDto.class
+com/school/management/model/Student.class

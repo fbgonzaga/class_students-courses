@@ -1,0 +1,20 @@
+version: "3"
+services:
+  school-application:
+    image: fbgonzaga/school-application
+    ports:
+      - "8080:8080"
+    networks:
+      - school-network
+    depends_on:
+      - school-database
+ 
+  school-database:
+    image: fbgonzaga/school-database
+    networks:
+      - school-network
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=True
+
+networks:
+  school-network: 
