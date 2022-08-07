@@ -87,6 +87,12 @@ A aplicação deve estar disponível em:
 
 `http://localhost:8080/`
 
+## Referências ##
+Acesse as seguintes páginas para aprender mais sobre boas práticas no desenvolvimento de APIs RESTFUL.
+
+ - [HTTP API Design Guide](https://geemus.gitbooks.io/http-api-design/content/en/)
+ - [Zalando RESTful API and Event Guidelines](https://opensource.zalando.com/restful-api-guidelines/index.html)
+
 ## Agradecimentos ##
 
 Muito obrigado pelo interesse no projeto.
@@ -178,6 +184,12 @@ Running the application:
 The application must be available at:
 
 `http://localhost:8080/`
+
+## References ##
+Visit the following pages to learn more about best practices in developing RESTFUL APIs.
+
+ - [HTTP API Design Guide](https://geemus.gitbooks.io/http-api-design/content/en/)
+ - [Zalando RESTful API and Event Guidelines](https://opensource.zalando.com/restful-api-guidelines/index.html)
 
 ## Acknowledgements ##
 
