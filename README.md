@@ -24,7 +24,7 @@ Author: Flavio B. Gonzaga
 
 flavio.gonzaga@unifal-mg.edu.br
 
-## Endpoints disponíveis##
+## Endpoints disponíveis ##
 
 As tabelas a seguir resumem os endpoints (com os respectivos métodos HTTP) que devem estar disponíveis no
 sistema para a gerência tanto dos estudantes quanto dos cursos.
