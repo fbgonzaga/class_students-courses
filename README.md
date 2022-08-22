@@ -2,6 +2,14 @@
 
 ## Comentários do aluno
 - Em projetos spring boot é recomendado anotar cada classe a ser injetada com seu estereótipo e seletor. Porém, como visto nesta template inicial, os repositórios e serviços só possuem uma implementação disponível para cada uso e esta condição é detectada pelo container, que utiliza a implementação compatível detectada recursivamente no diretório-base de busca de Beans.
+- Apesar de prometer autoconfiguração sem perda em configurabilidade, a "configurabilidade" do Spring requer cursos inteiros para implementar, requerindo buscar em referências diversos recursos específicos à arquitetura da framework Spring:
+  - Arquitetura de filtros HTTP
+  - Métodos-fábrica para filtros,gerência de chaves de segurança, banco de dados externo, etc.
+  - Parâmetros de configuração (via arquivo `application.properties`, métodos de injeção de beans, variáveis e implementações customizadas ) 
+  - Estereótipos, variáveis, métodos abstratos e anotações de configuração para cada módulo (JPA, Segurança, Repositórios REST, integração conta-google, etc.)
+Mesmo reduzindo o boilerplate em relação a uma aplicação Jakarta EE, a framework introduz em seu lugar a responsabilidade de configurar vários parâmetros de um sistema de injeção de dependência. O código resultante deixa de ser um projeto java e passa a ser um conjunto de classes misteriosamente relacionadas e implementadas por um conteiner a mais em cima de uma máquina virtual java.
+
+Onde são buscados os dados? A interface só menciona um método, o conteiner cuida disso! que informação deve ser trazida junto da entidade? o conteiner cuida disso! que tipo de dados tem que ser incluídos nas credenciais da API? o conteiner cuida disso!
 
 [PT-BR] O objetivo do trabalho é desenvolver as operações de CRUD relativas a um sistema básico para gerenciar estudantes e cursos.
 
