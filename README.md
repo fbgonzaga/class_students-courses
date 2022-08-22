@@ -1,5 +1,8 @@
 # [2022_01] Redes de Computadores / Computer Networks
 
+## Comentários do aluno
+- Em projetos spring boot é recomendado anotar cada classe a ser injetada com seu estereótipo e seletor. Porém, como visto nesta template inicial, os repositórios e serviços só possuem uma implementação disponível para cada uso e esta condição é detectada pelo container, que utiliza a implementação compatível detectada recursivamente no diretório-base de busca de Beans.
+
 [PT-BR] O objetivo do trabalho é desenvolver as operações de CRUD relativas a um sistema básico para gerenciar estudantes e cursos.
 
 Os requisitos são:
