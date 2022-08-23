@@ -1,6 +1,7 @@
 # [2022_01] Redes de Computadores / Computer Networks
 
 ## Comentários do aluno
+- A implementação das API de alterar lista de cursos do aluno e lista de alunos do curso geram uma chamada ao banco de dados por cada ID colocado. Em larga escala isso pode gerar até 5x mais chamadas ao banco de dados em relação a um método `@Query` com JPQL original.
 - Em projetos spring boot é recomendado anotar cada classe a ser injetada com seu estereótipo e seletor. Porém, como visto nesta template inicial, os repositórios e serviços só possuem uma implementação disponível para cada uso e esta condição é detectada pelo container, que utiliza a implementação compatível detectada recursivamente no diretório-base de busca de Beans.
 - Apesar de prometer autoconfiguração sem perda em configurabilidade, a "configurabilidade" do Spring requer cursos inteiros para implementar, requerindo buscar em referências diversos recursos específicos à arquitetura da framework Spring:
   - Arquitetura de filtros HTTP
