@@ -16,6 +16,19 @@ public class Course {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
+    public Course() {
+    }
+
+    public Course(Long id) {
+        this.id = id;
+    }
+
+    public Course(String name, Timestamp createdAt, Timestamp updatedAt) {
+        this.name = name;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
     public Course(Long id, String name, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.name = name;
