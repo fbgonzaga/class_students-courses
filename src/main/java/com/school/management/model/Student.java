@@ -8,6 +8,7 @@ import java.util.Set;
 
 @Entity
 public class Student {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -23,16 +24,19 @@ public class Student {
 		this.id = id;
 	}
 
-	public Student(String name, String address, Timestamp createdAt, Timestamp updatedAt) {
+	public Student(Long id, String name, String address, Timestamp createdAt, Timestamp updatedAt) {
+		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
 
-	public Student(Long id, String name, String address, Timestamp createdAt, Timestamp updatedAt) {
-		this(name, address, createdAt, updatedAt);
-		this.id = id;
+	public Student(String name, String address, Timestamp createdAt, Timestamp updatedAt) {
+		this.name = name;
+		this.address = address;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 	}
 
 	public Long getId() {
@@ -74,4 +78,5 @@ public class Student {
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
 }

@@ -1,6 +1,11 @@
 package com.school.management.rest;
 
+import com.school.management.model.Course;
+import com.school.management.model.Subscription;
+import com.school.management.model.dto.CourseDto;
 import com.school.management.model.dto.StudentDto;
+import com.school.management.model.dto.SubscriptionDto;
+import com.school.management.service.CourseService;
 import com.school.management.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -9,6 +14,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RestController
@@ -16,9 +23,12 @@ import java.util.Optional;
 public class StudentController {
 
     private final StudentService studentService;
+    private final CourseService courseService;
 
-    public StudentController(StudentService studentService) {
+    //shouldn't the container inject the beans *automagically*? why do i have to write a constructor?
+    public StudentController(StudentService studentService, CourseService courseService) {
         this.studentService = studentService;
+        this.courseService = courseService;
     }
 
     /**
@@ -132,9 +142,9 @@ public class StudentController {
      * @return list of courses the student is enrolled.
      */
     @GetMapping(value = "/{id}/courses")
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public void getCoursesFromStudent(@PathVariable Long id) {
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This endpoint must to be implemented.");
+    @ResponseStatus(HttpStatus.OK)
+    public List<Long> getCoursesFromStudent(@PathVariable Long id) {
+        return studentService.getStudentCourses(id);
     }
 
     /**
@@ -146,8 +156,9 @@ public class StudentController {
      */
     @GetMapping(value = "/courses")
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public void getRelations() {
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This endpoint must to be implemented.");
+    public List<SubscriptionDto> getRelations() {
+        return studentService.getCourses();
+
     }
 
     /**
@@ -161,8 +172,8 @@ public class StudentController {
      * @return a list containing the student id and the enrolled courses.
      */
     @PutMapping(value = "/{id}/courses")
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public void updateStudentCourses(@PathVariable Long id, @RequestBody List<Long> courseIds) {
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This endpoint must to be implemented.");
+    @ResponseStatus(HttpStatus.OK)
+    public List<CourseDto> updateStudentCourses(@PathVariable Long id, @RequestBody Set<Long> courseIds) {
+        return studentService.updateStudentCourses(id, courseIds);
     }
 }
