@@ -1,5 +1,8 @@
 package com.school.management.rest;
 
+import com.school.management.model.dto.CourseDto;
+import com.school.management.service.CourseService;
+import com.school.management.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +16,13 @@ import java.util.Optional;
 @RequestMapping("/courses")
 public class CourseController {
 
+	private final CourseService courseService;
+	private final StudentService studentService;
+
+	public CourseController(CourseService courseService, StudentService studentService) {
+		this.courseService = courseService;
+		this.studentService = studentService;
+	}
 
 	/**
 	 * GET methods (retrieving info)
@@ -28,9 +38,9 @@ public class CourseController {
 	 * @return the list of courses.
 	 */
 	@GetMapping(value = "/")
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	public void getCourses(@RequestParam(name = "without-students") Optional<Boolean> withoutStudents) {
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This endpoint must to be implemented.");
+	@ResponseStatus(HttpStatus.OK)
+	public List<CourseDto> getCourses(@RequestParam(name = "without-students") Optional<Boolean> withoutStudents) {
+		return courseService.getCourses();
 	}
 
 	/**
@@ -122,9 +132,9 @@ public class CourseController {
 	 * @return a list of the courses that were created with the submitted request.
 	 */
 	@PostMapping(value = "/")
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	public void createCourses() {
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This endpoint must to be implemented.");
+	@ResponseStatus(HttpStatus.CREATED)
+	public List<CourseDto>createCourses(@RequestBody List<CourseDto> courses) {
+		return courseService.createcourses(courses);
 	}
 
 	/**

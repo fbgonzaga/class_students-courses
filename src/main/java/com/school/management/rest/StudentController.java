@@ -1,6 +1,7 @@
 package com.school.management.rest;
 
 import com.school.management.model.dto.StudentDto;
+import com.school.management.service.CourseService;
 import com.school.management.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,12 @@ import java.util.Optional;
 public class StudentController {
 
     private final StudentService studentService;
+    private final CourseService courseService;
 
-    public StudentController(StudentService studentService) {
+    //shouldn't the container inject the beans *automagically*? why do i have to write a constructor?
+    public StudentController(StudentService studentService, CourseService courseService) {
         this.studentService = studentService;
+        this.courseService = courseService;
     }
 
     /**
