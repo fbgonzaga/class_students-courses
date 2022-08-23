@@ -16,6 +16,13 @@ public class SubscriptionDto {
         this.course = course;
     }
 
+    public SubscriptionDto(Long studentId, Long courseId){
+        this.student = new Student();
+        this.course = new Course();
+        this.student.setId(studentId);
+        this.course.setId(courseId);
+    }
+
     public Student getStudent() {
         return student;
     }

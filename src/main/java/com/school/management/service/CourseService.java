@@ -1,8 +1,11 @@
 package com.school.management.service;
 
 import com.school.management.model.Course;
+import com.school.management.model.Student;
 import com.school.management.model.dto.CourseDto;
+import com.school.management.model.dto.SubscriptionDto;
 import com.school.management.repository.CourseRepository;
+import com.school.management.repository.SubscriptionRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,9 +20,12 @@ import java.util.stream.Collectors;
 public class CourseService {
 
     private final CourseRepository courseRepository;
+    private final SubscriptionRepository subscriptionRepository;
 
-    public CourseService(CourseRepository courseRepository){this.courseRepository = courseRepository;};
-
+    public CourseService(CourseRepository courseRepository, SubscriptionRepository subscriptionRepository) {
+        this.courseRepository = courseRepository;
+        this.subscriptionRepository = subscriptionRepository;
+    }
 
     public List<CourseDto> getCourses(){
         return courseRepository.findAll().stream()
@@ -79,6 +85,7 @@ public class CourseService {
         if (confirmDeletion) {
             Course course = courseRepository.findById(id).orElseThrow(() -> new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "course not found."));
+            subscriptionRepository.deleteByCourse_id(id);
             courseRepository.deleteById(id);
         } else {
             throw new ResponseStatusException(
@@ -91,6 +98,7 @@ public class CourseService {
 
     public void deleteAllCourses(Boolean confirmDeletion) {
         if (confirmDeletion) {
+            subscriptionRepository.deleteAll();
             courseRepository.deleteAll();
         } else {
             throw new ResponseStatusException(
@@ -98,4 +106,23 @@ public class CourseService {
                     "To delete ALL courses and students-courses relationships, inform confirm-deletion=true as a query param.");
         }
     }
+
+    public List<Long> getCourseStudents(Long courseId) {
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Course with ID" + courseId + " was not found."));
+        List<Long> students = subscriptionRepository.findByCourseId(courseId).stream()
+                .map(subscription -> subscription.getStudent().getId())
+                .collect(Collectors.toList());
+        return students;
+    }
+
+    public List<SubscriptionDto> getStudents(){
+        return subscriptionRepository.orderByCourses().stream()
+                .map(subscription -> new SubscriptionDto(
+                        subscription.getStudent(),
+                        subscription.getCourse()))
+                .collect(Collectors.toList());
+
+    }
+
 }

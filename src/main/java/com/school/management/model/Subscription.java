@@ -1,12 +1,18 @@
 package com.school.management.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
 public class Subscription {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToOne
     private Course course;
 
+    @OneToOne
     private Student student;
 
     public Subscription() {
@@ -31,5 +37,13 @@ public class Subscription {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

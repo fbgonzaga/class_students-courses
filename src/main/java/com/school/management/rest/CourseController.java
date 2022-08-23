@@ -1,6 +1,8 @@
 package com.school.management.rest;
 
+import com.school.management.model.Course;
 import com.school.management.model.dto.CourseDto;
+import com.school.management.model.dto.SubscriptionDto;
 import com.school.management.service.CourseService;
 import com.school.management.service.StudentService;
 import org.springframework.http.HttpStatus;
@@ -68,18 +70,18 @@ public class CourseController {
 	 * @return list of students enrolled in the course.
 	 */
 	@GetMapping(value = "/{id}/students")
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	public void getStudentsFromCourse(@PathVariable Long id) {
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This endpoint must to be implemented.");
+	@ResponseStatus(HttpStatus.OK)
+	public List<Long> getStudentsFromCourse(@PathVariable Long id) {
+		return courseService.getCourseStudents(id);
 	}
 
 	/**
 	 * @return list of relationships between students and courses, ordered by course and student.
 	 */
 	@GetMapping(value = "/students")
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	public void getRelations() {
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "This endpoint must to be implemented.");
+	@ResponseStatus(HttpStatus.OK)
+	public List<SubscriptionDto> getRelations() {
+		return courseService.getStudents();
 	}
 
 	/**
